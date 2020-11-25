@@ -10,30 +10,18 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-    console.log(response);
+    const { data } = await axios.get('https://jsonplaceholder.typicode.com/users');
     this.setState({
-      usuarios: [
-        {
-          nombre: 'Cristian',
-          correo: 'felizpc1@gmail.com',
-          enlace: 'cristianiniguez.github.io',
-        },
-        {
-          nombre: 'Mary',
-          correo: 'maryluna@gmail.com',
-          enlace: 'luna.facebook.com',
-        },
-      ],
+      usuarios: data,
     });
   }
 
   ponerFilas = () =>
-    this.state.usuarios.map((usuario) => (
-      <tr>
-        <td>{usuario.nombre}</td>
-        <td>{usuario.correo}</td>
-        <td>{usuario.enlace}</td>
+    this.state.usuarios.map(({ id, name, email, website }) => (
+      <tr key={id}>
+        <td>{name}</td>
+        <td>{email}</td>
+        <td>{website}</td>
       </tr>
     ));
 
