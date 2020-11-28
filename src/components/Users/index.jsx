@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Spinner from '../general/Spinner';
+import Fatal from '../general/Fatal';
 
 import * as usersActions from '../../actions/usersActions';
 
@@ -11,8 +12,12 @@ class Users extends Component {
   }
 
   ponerContenido = () => {
-    if (this.props.loading) {
+    const { loading, error } = this.props;
+    if (loading) {
       return <Spinner />;
+    }
+    if (error) {
+      return <Fatal mensaje={error} />;
     }
     return (
       <table className='tabla'>
