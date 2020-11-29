@@ -5,13 +5,14 @@ import * as usersActions from '../../actions/usersActions';
 import * as postsActions from '../../actions/postsActions';
 
 const { getAll: usersGetAll } = usersActions;
-const { getAll: postsGetAll } = postsActions;
+const { getByUser: postsGetByUser } = postsActions;
 
 class Posts extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     if (!this.props.usersReducer.users.length) {
-      this.props.usersGetAll();
+      await this.props.usersGetAll();
     }
+    await this.props.postsGetByUser(this.props.match.params.key);
   }
   render() {
     console.log(this.props);
@@ -30,7 +31,7 @@ const mapStateToProps = ({ usersReducer, postsReducer }) => {
 
 const mapDispatchToProps = {
   usersGetAll,
-  postsGetAll,
+  postsGetByUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
