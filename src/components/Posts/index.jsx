@@ -8,7 +8,7 @@ import * as usersActions from '../../actions/usersActions';
 import * as postsActions from '../../actions/postsActions';
 
 const { getAll: usersGetAll } = usersActions;
-const { getByUser: postsGetByUser } = postsActions;
+const { getByUser: postsGetByUser, openClose } = postsActions;
 
 class Posts extends Component {
   async componentDidMount() {
@@ -75,13 +75,16 @@ class Posts extends Component {
 
     const { postsKey } = users[key];
 
-    return posts[postsKey].map((post) => (
-      <div key={post.id} onClick={() => alert(post.id)}>
+    return this.showInfo(posts[postsKey], postsKey);
+  };
+
+  showInfo = (posts, postsKey) =>
+    posts.map((post, postSubkey) => (
+      <div key={post.id} onClick={() => this.props.openClose(postsKey, postSubkey)}>
         <h2 className='post__title'>{post.title}</h2>
         <h3>{post.body}</h3>
       </div>
     ));
-  };
 
   render() {
     console.log(this.props);
@@ -101,6 +104,7 @@ const mapStateToProps = ({ usersReducer, postsReducer }) => {
 const mapDispatchToProps = {
   usersGetAll,
   postsGetByUser,
+  openClose,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

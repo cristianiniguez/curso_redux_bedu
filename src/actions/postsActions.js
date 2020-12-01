@@ -13,7 +13,8 @@ export const getByUser = (key) => async (dispatch, getState) => {
 
   try {
     const { data } = await axios.get(`http://jsonplaceholder.typicode.com/posts?userId=${userId}`);
-    const updatedPosts = [...posts, data];
+    const news = data.map((post) => ({ ...post, comments: [], open: false }));
+    const updatedPosts = [...posts, news];
 
     dispatch({
       type: GET_BY_USER,
@@ -38,4 +39,8 @@ export const getByUser = (key) => async (dispatch, getState) => {
       payload: 'Publicaciones no disponibles',
     });
   }
+};
+
+export const openClose = (postsKey, postSubkey) => (dispatch) => {
+  console.log({ postsKey, postSubkey });
 };
