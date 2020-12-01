@@ -48,12 +48,47 @@ class Posts extends Component {
     return <h1>Publicaciones de {name}</h1>;
   };
 
+  putPosts = () => {
+    const {
+      usersReducer,
+      usersReducer: { users },
+      postsReducer,
+      postsReducer: { posts },
+      match: {
+        params: { key },
+      },
+    } = this.props;
+
+    if (!users.length) return;
+    if (usersReducer.error) return;
+
+    if (postsReducer.loading) {
+      return <Spinner />;
+    }
+
+    if (postsReducer.error) {
+      return <Fatal mensaje={postsReducer.error} />;
+    }
+    if (!posts.length) return;
+
+    if (!('postsKey' in users[key])) return;
+
+    const { postsKey } = users[key];
+
+    return posts[postsKey].map((post) => (
+      <div key={post.id}>
+        <h2 className='post__title'>{post.title}</h2>
+        <h3>{post.body}</h3>
+      </div>
+    ));
+  };
+
   render() {
     console.log(this.props);
     return (
       <div>
-        {this.props.match.params.key}
         {this.putUser()}
+        {this.putPosts()}
       </div>
     );
   }
