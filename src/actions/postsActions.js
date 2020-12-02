@@ -59,3 +59,7 @@ export const openClose = (postsKey, postSubkey) => (dispatch, getState) => {
     payload: updatedPosts,
   });
 };
+
+export const getComments = (postsKey, postSubkey) => (dispatch, getState) => {
+  // ...
+}
