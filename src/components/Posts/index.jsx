@@ -90,7 +90,9 @@ class Posts extends Component {
 
   showComments = (postsKey, postSubkey, comments) => {
     this.props.openClose(postsKey, postSubkey);
-    this.props.getComments(postsKey, postSubkey);
+    if (!comments.length) {
+      this.props.getComments(postsKey, postSubkey);
+    }
   };
 
   render() {

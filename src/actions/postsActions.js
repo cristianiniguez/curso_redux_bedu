@@ -60,6 +60,25 @@ export const openClose = (postsKey, postSubkey) => (dispatch, getState) => {
   });
 };
 
-export const getComments = (postsKey, postSubkey) => (dispatch, getState) => {
-  // ...
-}
+export const getComments = (postsKey, postSubkey) => async (dispatch, getState) => {
+  const { posts } = getState().postsReducer;
+  const selectedPost = posts[postsKey][postSubkey];
+
+  const { data } = await axios.get(
+    `https://jsonplaceholder.typicode.com/comments?postId=${selectedPost.id}`,
+  );
+
+  const updatedPost = {
+    ...selectedPost,
+    comments: data,
+  };
+
+  const updatedPosts = [...posts];
+  updatedPosts[postsKey] = [...posts[postsKey]];
+  updatedPosts[postsKey][postSubkey] = updatedPost;
+
+  dispatch({
+    type: UPDATE,
+    payload: updatedPosts,
+  });
+};
