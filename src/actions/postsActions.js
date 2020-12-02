@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UPDATE, LOADING, ERROR, COM_LOADING, COM_ERROR } from '../types/postsTypes';
+import { UPDATE, LOADING, ERROR, COM_UPDATE, COM_LOADING, COM_ERROR } from '../types/postsTypes';
 import * as usersTypes from '../types/usersTypes';
 
 const { GET_ALL: USERS_GET_ALL } = usersTypes;
@@ -83,7 +83,7 @@ export const getComments = (postsKey, postSubkey) => async (dispatch, getState) 
     updatedPosts[postsKey][postSubkey] = updatedPost;
 
     dispatch({
-      type: UPDATE,
+      type: COM_UPDATE,
       payload: updatedPosts,
     });
   } catch (error) {

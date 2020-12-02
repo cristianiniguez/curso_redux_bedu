@@ -1,4 +1,4 @@
-import { UPDATE, LOADING, ERROR, COM_LOADING, COM_ERROR } from '../types/postsTypes';
+import { UPDATE, LOADING, ERROR, COM_UPDATE, COM_LOADING, COM_ERROR } from '../types/postsTypes';
 
 const INITIAL_STATE = {
   posts: [],
@@ -12,6 +12,8 @@ const postsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UPDATE:
       return { ...state, posts: action.payload, loading: false, error: '' };
+    case COM_UPDATE:
+      return { ...state, posts: action.payload, com_loading: false, com_error: '' };
     case LOADING:
       return { ...state, loading: true };
     case ERROR:

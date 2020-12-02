@@ -6,11 +6,11 @@ import Fatal from '../general/Fatal';
 
 const Comments = (props) => {
   console.log(props);
-  if (props.loading) {
-    return <Spinner />;
+  if (props.com_error) {
+    return <Fatal mensaje={props.com_error} />;
   }
-  if (props.error) {
-    <Fatal mensaje={props.error} />;
+  if (props.com_loading && !props.comments.length) {
+    return <Spinner />;
   }
   const putComments = () =>
     props.comments.map((comment) => (
