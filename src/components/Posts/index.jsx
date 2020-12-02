@@ -83,6 +83,7 @@ class Posts extends Component {
       <div key={post.id} onClick={() => this.props.openClose(postsKey, postSubkey)}>
         <h2 className='post__title'>{post.title}</h2>
         <h3>{post.body}</h3>
+        {post.open ? 'abierto' : 'cerrado'}
       </div>
     ));
 
