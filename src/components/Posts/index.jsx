@@ -84,7 +84,7 @@ class Posts extends Component {
       <div key={post.id} onClick={() => this.showComments(postsKey, postSubkey, post.comments)}>
         <h2 className='post__title'>{post.title}</h2>
         <h3>{post.body}</h3>
-        {post.open ? <Comments /> : ''}
+        {post.open ? <Comments comments={post.comments} /> : ''}
       </div>
     ));
 
