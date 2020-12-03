@@ -4,8 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Menu from './Menu';
 import Users from './Users';
 import Posts from './Posts';
-
-const Tasks = () => <div>Tareas</div>;
+import Tasks from './Tasks';
 
 const App = () => (
   <BrowserRouter>
