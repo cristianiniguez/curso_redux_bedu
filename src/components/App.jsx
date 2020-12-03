@@ -6,12 +6,15 @@ import Users from './Users';
 import Posts from './Posts';
 import Tasks from './Tasks';
 
+import TasksSave from './Tasks/Save';
+
 const App = () => (
   <BrowserRouter>
     <Menu />
     <div className='margen'>
       <Route exact path='/' component={Users} />
       <Route exact path='/tasks' component={Tasks} />
+      <Route exact path='/tasks/save' component={TasksSave} />
       <Route exact path='/posts/:key' component={Posts} />
     </div>
   </BrowserRouter>
