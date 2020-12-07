@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Spinner from '../general/Spinner';
+import Fatal from '../general/Fatal';
+
 import * as tasksActions from '../../actions/tasksActions';
 
 class Save extends Component {
@@ -18,6 +21,30 @@ class Save extends Component {
     add(newTask);
   };
 
+  disable = () => {
+    const { userId, title, loading } = this.props;
+
+    if (loading) {
+      return true;
+    }
+
+    if (!userId || !title) {
+      return true;
+    }
+
+    return false;
+  };
+
+  showAction = () => {
+    const { error, loading } = this.props;
+    if (loading) {
+      return <Spinner />;
+    }
+    if (error) {
+      return <Fatal mensaje={error} />;
+    }
+  };
+
   render() {
     return (
       <div>
@@ -28,7 +55,10 @@ class Save extends Component {
         Título: <input type='text' value={this.props.title} onChange={this.changeTitle} />
         <br />
         <br />
-        <button onClick={this.save}>Guardar</button>
+        <button onClick={this.save} disabled={this.disable()}>
+          Guardar
+        </button>
+        {this.showAction()}
       </div>
     );
   }
