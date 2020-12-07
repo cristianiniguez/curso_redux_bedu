@@ -14,6 +14,12 @@ class Tasks extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (!Object.keys(this.props.tasks).length) {
+      this.props.getAll();
+    }
+  }
+
   showContent = () => {
     const { tasks, loading, error } = this.props;
 
@@ -34,7 +40,7 @@ class Tasks extends Component {
   };
 
   putTasks = (userId) => {
-    const { tasks, changeCheck } = this.props;
+    const { tasks, changeCheck, deleteTask } = this.props;
     const tasksByUser = { ...tasks[userId] };
     return Object.keys(tasksByUser).map((taskId) => (
       <div key={taskId}>
@@ -47,7 +53,9 @@ class Tasks extends Component {
         <Link to={`/tasks/save/${userId}/${taskId}`}>
           <button className='m-left'>Editar</button>
         </Link>
-        <button className='m-left'>Eliminar</button>
+        <button className='m-left' onClick={() => deleteTask(taskId)}>
+          Eliminar
+        </button>
       </div>
     ));
   };
