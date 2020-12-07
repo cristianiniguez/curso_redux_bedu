@@ -12,8 +12,13 @@ class Save extends Component {
     this.props.changeTitle(event.target.value);
   };
 
+  save = () => {
+    const { userId, title, add } = this.props;
+    const newTask = { userId, title, completed: false };
+    add(newTask);
+  };
+
   render() {
-    console.log(this.props);
     return (
       <div>
         <h1>Guardar tarea</h1>
@@ -23,7 +28,7 @@ class Save extends Component {
         Título: <input type='text' value={this.props.title} onChange={this.changeTitle} />
         <br />
         <br />
-        <button>Guardar</button>
+        <button onClick={this.save}>Guardar</button>
       </div>
     );
   }
