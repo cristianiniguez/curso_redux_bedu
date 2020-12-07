@@ -1,4 +1,12 @@
-import { GET_ALL, LOADING, ERROR, CHANGE_USER_ID, CHANGE_TITLE, ADDED } from '../types/tasksTypes';
+import {
+  GET_ALL,
+  LOADING,
+  ERROR,
+  CHANGE_USER_ID,
+  CHANGE_TITLE,
+  SAVE,
+  UPDATE,
+} from '../types/tasksTypes';
 
 const INITIAL_STATE = {
   tasks: {},
@@ -21,7 +29,7 @@ const tasksReducer = (state = INITIAL_STATE, action) => {
       return { ...state, userId: action.payload };
     case CHANGE_TITLE:
       return { ...state, title: action.payload };
-    case ADDED:
+    case SAVE:
       return {
         ...state,
         tasks: {},
@@ -31,6 +39,8 @@ const tasksReducer = (state = INITIAL_STATE, action) => {
         userId: '',
         title: '',
       };
+    case UPDATE:
+      return { ...state, tasks: action.payload };
     default:
       return state;
   }
