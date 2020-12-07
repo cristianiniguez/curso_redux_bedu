@@ -8,6 +8,23 @@ import Fatal from '../general/Fatal';
 import * as tasksActions from '../../actions/tasksActions';
 
 class Save extends Component {
+  componentDidMount() {
+    const {
+      match: {
+        params: { userId, taskId },
+      },
+      tasks,
+      changeUserId,
+      changeTitle,
+    } = this.props;
+
+    if (userId && taskId) {
+      const task = tasks[userId][taskId];
+      changeUserId(task.userId);
+      changeTitle(task.title);
+    }
+  }
+
   changeUserId = (event) => {
     this.props.changeUserId(event.target.value);
   };
@@ -17,9 +34,28 @@ class Save extends Component {
   };
 
   save = () => {
-    const { userId, title, add } = this.props;
+    const {
+      match: { params },
+      tasks,
+      userId,
+      title,
+      add,
+      edit,
+    } = this.props;
+
     const newTask = { userId, title, completed: false };
-    add(newTask);
+
+    if (params.userId && params.taskId) {
+      const task = tasks[params.userId][params.taskId];
+      const editedTask = {
+        ...newTask,
+        completed: task.completed,
+        id: task.id,
+      };
+      edit(editedTask);
+    } else {
+      add(newTask);
+    }
   };
 
   disable = () => {

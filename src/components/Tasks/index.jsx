@@ -40,6 +40,10 @@ class Tasks extends Component {
       <div key={taskId}>
         <input type='checkbox' defaultChecked={tasksByUser[taskId].completed} />
         {tasksByUser[taskId].title}
+        <Link to={`/tasks/save/${userId}/${taskId}`}>
+          <button className='m-left'>Editar</button>
+        </Link>
+        <button className='m-left'>Eliminar</button>
       </div>
     ));
   };
@@ -47,9 +51,9 @@ class Tasks extends Component {
   render() {
     return (
       <div>
-        <button>
-          <Link to='/tasks/save'>Add</Link>
-        </button>
+        <Link to='/tasks/save'>
+          <button>Add</button>
+        </Link>
         {this.showContent()}
       </div>
     );

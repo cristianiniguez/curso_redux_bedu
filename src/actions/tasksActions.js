@@ -53,3 +53,7 @@ export const add = (newTask) => async (dispatch) => {
     dispatch({ type: ERROR, payload: 'Intente más tarde' });
   }
 };
+
+export const edit = (editedTask) => async (dispatch) => {
+  console.log(editedTask);
+};
