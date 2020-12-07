@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Spinner from '../general/Spinner';
@@ -48,6 +49,7 @@ class Save extends Component {
   render() {
     return (
       <div>
+        {this.props.return ? <Redirect to='/tasks' /> : ''}
         <h1>Guardar tarea</h1>
         Usuario id: <input type='number' value={this.props.userId} onChange={this.changeUserId} />
         <br />
