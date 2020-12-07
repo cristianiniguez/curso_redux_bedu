@@ -7,6 +7,7 @@ import {
   CHANGE_TITLE,
   SAVE,
   UPDATE,
+  CLEAN,
 } from '../types/tasksTypes';
 
 export const getAll = () => async (dispatch) => {
@@ -51,8 +52,7 @@ export const changeTitle = (title) => (dispatch) => {
 export const add = (newTask) => async (dispatch) => {
   dispatch({ type: LOADING });
   try {
-    const { data } = await axios.post('https://jsonplaceholder.typicode.com/todos', newTask);
-    console.log(data);
+    await axios.post('https://jsonplaceholder.typicode.com/todos', newTask);
     dispatch({ type: SAVE });
   } catch (error) {
     console.error(error.message);
@@ -63,11 +63,7 @@ export const add = (newTask) => async (dispatch) => {
 export const edit = (editedTask) => async (dispatch) => {
   dispatch({ type: LOADING });
   try {
-    const { data } = await axios.put(
-      `https://jsonplaceholder.typicode.com/todos/${editedTask.id}`,
-      editedTask,
-    );
-    console.log(data);
+    await axios.put(`https://jsonplaceholder.typicode.com/todos/${editedTask.id}`, editedTask);
     dispatch({ type: SAVE });
   } catch (error) {
     console.error(error.message);
@@ -97,11 +93,14 @@ export const changeCheck = (userId, taskId) => (dispatch, getState) => {
 export const deleteTask = (taskId) => async (dispatch) => {
   dispatch({ type: LOADING });
   try {
-    const { data } = await axios.delete(`https://jsonplaceholder.typicode.com/todos/${taskId}`);
-    console.log(data);
+    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${taskId}`);
     dispatch({ type: GET_ALL, payload: {} });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     dispatch({ type: ERROR, payload: 'Servicio no disponible' });
   }
+};
+
+export const cleanForm = () => (dispatch) => {
+  dispatch({ type: CLEAN });
 };

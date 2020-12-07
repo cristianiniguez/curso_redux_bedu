@@ -33,7 +33,7 @@ export const getByUser = (key) => async (dispatch, getState) => {
       payload: updatedUsers,
     });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     dispatch({
       type: ERROR,
       payload: 'Publicaciones no disponibles',
@@ -87,7 +87,7 @@ export const getComments = (postsKey, postSubkey) => async (dispatch, getState) 
       payload: updatedPosts,
     });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     dispatch({
       type: COM_ERROR,
       payload: 'Comentarios no disponibles',

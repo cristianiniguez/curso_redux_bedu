@@ -27,7 +27,6 @@ class Posts extends Component {
       return;
     }
     if (!('postsKey' in this.props.usersReducer.users[key])) {
-      console.log('getting posts');
       await postsGetByUser(this.props.match.params.key);
     }
   }
@@ -96,7 +95,6 @@ class Posts extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         {this.putUser()}

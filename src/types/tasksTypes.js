@@ -6,3 +6,4 @@ export const CHANGE_USER_ID = 'tasks_change_user_id';
 export const CHANGE_TITLE = 'tasks_change_title';
 export const SAVE = 'tasks_added';
 export const UPDATE = 'tasks_update';
+export const CLEAN = 'tasks_clean';

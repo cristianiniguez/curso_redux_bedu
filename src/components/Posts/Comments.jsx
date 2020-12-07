@@ -5,7 +5,6 @@ import Spinner from '../general/Spinner';
 import Fatal from '../general/Fatal';
 
 const Comments = (props) => {
-  console.log(props);
   if (props.com_error) {
     return <Fatal mensaje={props.com_error} />;
   }

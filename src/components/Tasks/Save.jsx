@@ -16,12 +16,15 @@ class Save extends Component {
       tasks,
       changeUserId,
       changeTitle,
+      cleanForm,
     } = this.props;
 
     if (userId && taskId) {
       const task = tasks[userId][taskId];
       changeUserId(task.userId);
       changeTitle(task.title);
+    } else {
+      cleanForm();
     }
   }
 
